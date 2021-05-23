@@ -68,7 +68,9 @@ const PostList = () => {
           placeholder="Enter a subreddit"
         />
       </InputContainer>
-      <PageButtons isLoading={isLoading} pageCount={pageCount} onClickNext={onClickNext} onClickPrev={onClickPrev} />
+      {!hasError && (
+        <PageButtons isLoading={isLoading} pageCount={pageCount} onClickNext={onClickNext} onClickPrev={onClickPrev} />
+      )}
       {isLoading && <p>Loading</p>}
       {hasError && <p>Error</p>}
       {!isLoading && !hasError && response && hasPosts && (
@@ -80,7 +82,7 @@ const PostList = () => {
             ))}
         </PostsContainer>
       )}
-      {hasPosts && !isLoading && (
+      {hasPosts && !isLoading && !hasError && (
         <PageButtons isLoading={isLoading} pageCount={pageCount} onClickNext={onClickNext} onClickPrev={onClickPrev} />
       )}
     </>
