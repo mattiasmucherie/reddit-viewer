@@ -1,6 +1,7 @@
 # HiQ assignment
 
 A reddit-viewer made as an assigment for HiQ.
+You can view the live version deployed [here](https://determined-beaver-40f9ca.netlify.app/)
 
 ## Running the application locally
 Start with  installing the dependencies with
