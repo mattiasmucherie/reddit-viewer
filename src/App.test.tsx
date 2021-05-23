@@ -60,6 +60,5 @@ test('render error on fetch', async () => {
   render(<App />)
   const errorElement = await screen.findByText(/Error/i)
   console.error = original
-  screen.logTestingPlaygroundURL()
   expect(errorElement).toBeInTheDocument()
 })

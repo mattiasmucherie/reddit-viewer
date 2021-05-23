@@ -21,10 +21,8 @@ test('renders a post with selftext', () => {
   const numberComments = screen.getByRole('link', {
     name: /27 comments/i,
   })
-  const author = screen.getByRole('heading', {
-    name: /by: thedeafvampire/i,
-  })
-  const createdDate = screen.getByRole('heading', {
+
+  const authorAndDateHeading = screen.getByRole('heading', {
     name: /5\/23\/2021, 11:32:31 pm/i,
   })
   expect(img).toBeInTheDocument()
@@ -32,8 +30,7 @@ test('renders a post with selftext', () => {
   expect(showSelf).toBeInTheDocument()
   expect(permalink).toBeInTheDocument()
   expect(numberComments).toBeInTheDocument()
-  expect(author).toBeInTheDocument()
-  expect(createdDate).toBeInTheDocument()
+  expect(authorAndDateHeading).toBeInTheDocument()
 })
 
 test('renders selftext when expanding', () => {

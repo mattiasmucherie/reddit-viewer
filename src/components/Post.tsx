@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RedditChild } from '../types/redditTypes'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
+import formatDistance from 'date-fns/formatDistance/index'
 
 const Card = styled.li`
   border-radius: 4px;
@@ -51,7 +52,7 @@ const AuthorAndDate = styled.div`
   justify-content: flex-end;
   & > h6 {
     margin: 0;
-    padding: 0 5px;
+    //padding: 0 5px;
   }
 `
 const LinkContainer = styled.div`
@@ -112,8 +113,9 @@ const Post: React.VFC<PostProps> = ({ c }) => {
             </Permalink>
           </LinkContainer>
           <AuthorAndDate>
-            <h6>By: {c.data.author}</h6>
-            <h6>{new Date(c.data.created * 1000).toLocaleString()}</h6>
+            <h6 title={new Date(c.data.created * 1000).toLocaleString()}>
+              Submitted {formatDistance(new Date(c.data.created * 1000), new Date())} by: {c.data.author}
+            </h6>
           </AuthorAndDate>
         </SecondColumn>
       </CardContainer>
