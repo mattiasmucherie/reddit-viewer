@@ -32,7 +32,7 @@ export interface ChildData {
   pwls: number
   link_flair_css_class: null | string
   downs: number
-  thumbnail_height?: null
+  thumbnail_height?: number | null
   top_awarded_type: null
   hide_score: boolean
   name: string
@@ -44,11 +44,11 @@ export interface ChildData {
   ups: number
   total_awards_received: number
   media_embed: Gildings
-  thumbnail_width?: null
-  author_flair_template_id: null
+  thumbnail_width?: number | null
+  author_flair_template_id: string | null
   is_original_content: boolean
   user_reports: any[]
-  secure_media: null
+  secure_media: Media | null
   is_reddit_media_domain: boolean
   is_meta: boolean
   category: null
@@ -59,8 +59,8 @@ export interface ChildData {
   approved_by: null
   author_premium: boolean
   thumbnail: string
-  edited: boolean
-  author_flair_css_class: null
+  edited: boolean | number
+  author_flair_css_class: string | null
   author_flair_richtext: any[]
   gildings: Gildings
   post_hint?: string
@@ -92,7 +92,7 @@ export interface ChildData {
   can_gild: boolean
   spoiler: boolean
   locked: boolean
-  author_flair_text: null
+  author_flair_text: string | null
   treatment_tags: any[]
   visited: boolean
   removed_by: null
@@ -113,7 +113,7 @@ export interface ChildData {
   contest_mode: boolean
   mod_reports: any[]
   author_patreon_flair: boolean
-  author_flair_text_color: null
+  author_flair_text_color: string | null
   permalink: string
   parent_whitelist_status: string
   stickied: boolean
@@ -121,7 +121,7 @@ export interface ChildData {
   subreddit_subscribers: number
   created_utc: number
   num_crossposts: number
-  media: null
+  media: Media | null
   is_video: boolean
   link_flair_template_id?: string
   url_overridden_by_dest?: string
@@ -145,4 +145,21 @@ export interface Source {
   url: string
   width: number
   height: number
+}
+
+export interface Media {
+  reddit_video: RedditVideo
+}
+
+export interface RedditVideo {
+  bitrate_kbps: number
+  fallback_url: string
+  height: number
+  width: number
+  scrubber_media_url: string
+  dash_url: string
+  duration: number
+  hls_url: string
+  is_gif: boolean
+  transcoding_status: string
 }

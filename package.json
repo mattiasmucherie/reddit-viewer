@@ -45,6 +45,8 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.9",
-    "prettier": "^2.3.0"
+    "msw": "^0.29.0",
+    "prettier": "^2.3.0",
+    "whatwg-fetch": "^3.6.2"
   }
 }

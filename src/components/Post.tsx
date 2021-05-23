@@ -118,7 +118,7 @@ const Post: React.VFC<PostProps> = ({ c }) => {
         </SecondColumn>
       </CardContainer>
       {expanded && c.data.selftext && (
-        <ExpandedContainer>
+        <ExpandedContainer data-testid={`selftext-container-${c.data.id}`}>
           <ReactMarkdown>{c.data.selftext}</ReactMarkdown>
         </ExpandedContainer>
       )}

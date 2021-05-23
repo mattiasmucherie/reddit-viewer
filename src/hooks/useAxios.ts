@@ -8,6 +8,7 @@ function useAxios<T = any>(url: string) {
 
   useEffect(() => {
     const source = axios.CancelToken.source()
+    let unmounted = false
     const fetchData = async () => {
       try {
         setIsLoading(true)
@@ -22,11 +23,16 @@ function useAxios<T = any>(url: string) {
           setHasError(true)
         }
       } finally {
-        setIsLoading(false)
+        if (!unmounted) {
+          setIsLoading(false)
+        }
       }
     }
     fetchData()
-    return () => source.cancel()
+    return () => {
+      unmounted = true
+      source.cancel()
+    }
   }, [url])
 
   return { response, isLoading, hasError }
