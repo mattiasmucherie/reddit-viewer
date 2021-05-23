@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+# HiQ assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A reddit-viewer made as an assigment for HiQ.
 
-## Available Scripts
+## Running the application locally
+Start with  installing the dependencies with
+```
+yarn
+```
 
-In the project directory, you can run:
+Then you can run
+```
+yarn start
+```
+To run test run: `yarn test` and to build the project you can run `yarn build` which will build in a `/build` folder.
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Features
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- The list is presenting 10 posts
+- You can go back and forth between pages
+- The user can browse their favorite subreddit by entering it in the input
+- A post contains : `thumbnail`, `created`, `num_comments`, `author`, `score`, `permalink` and `title`
+- A button available if it's a selfpost, and it contains `selftext`
+- A unit test on the `Post` component
+- An integration test when pagination is tested and the change of subreddit
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Stack
 
-### `yarn build`
+Repo initiated with `create-react-app` with the typescript template in order to get started faster.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I used `styled-components` for all the styling except for the body styling which I prefer to handle in normal `.css` file.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The unit and the integration tests are written with `jest` and `testing-library`. 
+The callbacks for the integration tests are mocked with the `msw` library.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Future additions
+Adding a `select` for the user to be able to choose the number of posts shown on the page could be added as another state (`postLimit`) within `PostList.tsx`
+Then instead of having `POST_LIMIT` hardcoded in the url, you could just insert the new state `postLimit` instead.
+It would be very similar to how the `subreddit` state is functioning.
 
-### `yarn eject`
+Adding comments would also be feasible.
+I would create a new component inside of `Post.tsx` that would fetch the comments on an expansion of the comment section or on a button click that would open a modal with the comments.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Feel free to contact me and ask more questions**

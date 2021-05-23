@@ -29,11 +29,11 @@ const InputContainer = styled.div`
   justify-content: center;
   margin-top: 30px;
 `
-
+const POST_LIMIT = 10
 const PostList = () => {
   const [pageCount, setPageCount] = useState(0)
   const [subreddit, setSubreddit] = useState('javascript')
-  const [url, setUrl] = useState(`https://www.reddit.com/r/${subreddit}.json?limit=10`)
+  const [url, setUrl] = useState(`https://www.reddit.com/r/${subreddit}.json?limit=${POST_LIMIT}`)
   const { isLoading, hasError, response } = useAxios<RedditResponse>(url)
   const hasPosts = !!response && !!response.data.children.length
   const getFirstPost = hasPosts ? response?.data.children[0].data.name : null
@@ -42,20 +42,20 @@ const PostList = () => {
 
   useEffect(() => {
     if (debouncedSearchTerm) {
-      setUrl(`https://www.reddit.com/r/${debouncedSearchTerm}.json?limit=10`)
+      setUrl(`https://www.reddit.com/r/${debouncedSearchTerm}.json?limit=${POST_LIMIT}`)
     }
   }, [debouncedSearchTerm])
 
   const onClickNext = () => {
     setPageCount((prevState) => prevState + 1)
     if (getLastPost) {
-      setUrl(`https://www.reddit.com/r/${subreddit}.json?limit=10&after=${getLastPost}`)
+      setUrl(`https://www.reddit.com/r/${subreddit}.json?limit=${POST_LIMIT}&after=${getLastPost}`)
     }
   }
   const onClickPrev = () => {
     setPageCount((prevState) => prevState - 1)
     if (getFirstPost) {
-      setUrl(`https://www.reddit.com/r/${subreddit}.json?limit=10&before=${getFirstPost}`)
+      setUrl(`https://www.reddit.com/r/${subreddit}.json?limit=${POST_LIMIT}&before=${getFirstPost}`)
     }
   }
 

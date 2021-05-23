@@ -52,7 +52,6 @@ const AuthorAndDate = styled.div`
   justify-content: flex-end;
   & > h6 {
     margin: 0;
-    //padding: 0 5px;
   }
 `
 const LinkContainer = styled.div`
@@ -60,7 +59,7 @@ const LinkContainer = styled.div`
   font-size: 10px;
   font-weight: bold;
 `
-const Permalink = styled.a`
+const PostLink = styled.a`
   margin: 10px 10px 10px 0;
   color: inherit;
   text-decoration: none;
@@ -105,12 +104,12 @@ const Post: React.VFC<PostProps> = ({ c }) => {
             {c.data.selftext && (
               <ExpandButton onClick={toggleExpanded}>{expanded ? 'Close' : 'Show'} self text</ExpandButton>
             )}
-            <Permalink href={`https://old.reddit.com${c.data.permalink}`} target="_blank" rel="noopener noreferrer">
+            <PostLink href={`https://old.reddit.com${c.data.permalink}`} target="_blank" rel="noopener noreferrer">
               Got to post
-            </Permalink>
-            <Permalink href={`https://old.reddit.com${c.data.permalink}`} target="_blank" rel="noopener noreferrer">
+            </PostLink>
+            <PostLink href={`https://old.reddit.com${c.data.permalink}`} target="_blank" rel="noopener noreferrer">
               {c.data.num_comments} {c.data.num_comments === 1 ? 'comment' : 'comments'}
-            </Permalink>
+            </PostLink>
           </LinkContainer>
           <AuthorAndDate>
             <h6 title={new Date(c.data.created * 1000).toLocaleString()}>
