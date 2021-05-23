@@ -1,10 +1,17 @@
-import React from 'react';
+import React from 'react'
 import PostList from './containers/PostList'
+import styled from 'styled-components'
 
+const AppContainer = styled.div`
+  max-width: 1024px;
+  margin: 0 auto;
+`
 function App() {
   return (
-    <PostList/>
-  );
+    <AppContainer>
+      <PostList />
+    </AppContainer>
+  )
 }
 
-export default App;
+export default App

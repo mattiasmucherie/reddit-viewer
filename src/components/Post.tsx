@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { RedditChild } from '../types/redditTypes'
 import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
 
 const Card = styled.li`
   border-radius: 4px;
   background: #fff;
-  padding: 5px;
+  padding: 10px;
   margin: 10px;
 `
 const CardContainer = styled.div`
@@ -25,6 +26,7 @@ const SecondColumn = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  padding-left: 10px;
 `
 
 const Score = styled.p`
@@ -40,6 +42,9 @@ const Thumbnail = styled.img`
 `
 const PostTitle = styled.h4`
   margin: 0;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
 `
 const AuthorAndDate = styled.div`
   display: flex;
@@ -49,29 +54,74 @@ const AuthorAndDate = styled.div`
     padding: 0 5px;
   }
 `
+const LinkContainer = styled.div`
+  color: #888;
+  font-size: 10px;
+  font-weight: bold;
+`
+const Permalink = styled.a`
+  margin: 10px 10px 10px 0;
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+`
+const ExpandButton = styled.button`
+  border: none;
+  background: inherit;
+  color: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 10px 10px 10px 0;
+`
+const ExpandedContainer = styled.div`
+  max-width: 100%;
+  overflow: scroll;
+  margin-left: 80px;
+`
 
 interface PostProps {
   c: RedditChild
 }
 
 const Post: React.VFC<PostProps> = ({ c }) => {
+  const [expanded, setExpanded] = useState(false)
   const thumbnail = c.data.thumbnail !== 'self' ? c.data.thumbnail : 'https://via.placeholder.com/140?text=selfpost'
-  console.warn(c.data.selftext)
+  const toggleExpanded = () => {
+    setExpanded((prevState) => !prevState)
+  }
   return (
-    <Card>
+    <Card data-testid={`post-card-${c.data.id}`}>
       <CardContainer>
         <FirstColumn>
           <Score>{c.data.score}</Score>
           {c.data.thumbnail && <Thumbnail src={thumbnail} alt="Thumbnail for post" />}
         </FirstColumn>
         <SecondColumn>
-          <PostTitle>{c.data.title}</PostTitle>
+          <LinkContainer>
+            <PostTitle>{c.data.title}</PostTitle>
+            {c.data.selftext && (
+              <ExpandButton onClick={toggleExpanded}>{expanded ? 'Close' : 'Show'} self text</ExpandButton>
+            )}
+            <Permalink href={`https://old.reddit.com${c.data.permalink}`} target="_blank" rel="noopener noreferrer">
+              Got to post
+            </Permalink>
+            <Permalink href={`https://old.reddit.com${c.data.permalink}`} target="_blank" rel="noopener noreferrer">
+              {c.data.num_comments} {c.data.num_comments === 1 ? 'comment' : 'comments'}
+            </Permalink>
+          </LinkContainer>
           <AuthorAndDate>
             <h6>By: {c.data.author}</h6>
             <h6>{new Date(c.data.created * 1000).toLocaleString()}</h6>
           </AuthorAndDate>
         </SecondColumn>
       </CardContainer>
+      {expanded && c.data.selftext && (
+        <ExpandedContainer>
+          <ReactMarkdown>{c.data.selftext}</ReactMarkdown>
+        </ExpandedContainer>
+      )}
     </Card>
   )
 }

@@ -7,19 +7,26 @@ function useAxios<T = any>(url: string) {
   const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
+    const source = axios.CancelToken.source()
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const resp: AxiosResponse<T> = await axios.get(url)
+        setHasError(false)
+        const resp: AxiosResponse<T> = await axios.get(url, {
+          cancelToken: source.token,
+        })
         setResponse(resp.data)
       } catch (err) {
-        console.error(err)
-        setHasError(true)
+        if (!axios.isCancel(err)) {
+          console.error(err)
+          setHasError(true)
+        }
       } finally {
         setIsLoading(false)
       }
     }
     fetchData()
+    return () => source.cancel()
   }, [url])
 
   return { response, isLoading, hasError }
