@@ -155,7 +155,7 @@ export const mockDataPostNoSelf: RedditChild = {
     score: 23,
     approved_by: null,
     author_premium: false,
-    thumbnail: '',
+    thumbnail: 'https://b.thumbs.redditmedia.com/R5t3jA3K-BUbXOTNcy8uZy6B2-EzIWoTbcJ94kHQwzw.jpg',
     edited: false,
     author_flair_css_class: null,
     author_flair_richtext: [],

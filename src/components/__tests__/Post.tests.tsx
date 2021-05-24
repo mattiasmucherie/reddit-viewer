@@ -5,9 +5,7 @@ import { mockDataPostNoSelf, mockDataPostSelf } from '../../mock/mockDataPost'
 
 test('renders a post with selftext', () => {
   render(<Post c={mockDataPostSelf} />)
-  const img = screen.getByRole('img', {
-    name: /thumbnail for post/i,
-  })
+
   const title = screen.getByRole('heading', {
     name: /would i need multiple \.js files for a website containing multiple games\?/i,
   })
@@ -15,17 +13,14 @@ test('renders a post with selftext', () => {
     name: /show self text/i,
   })
   const permalink = screen.getByRole('link', {
-    name: /got to post/i,
+    name: /Would I need multiple .js files for a website containing multiple games?/i,
   })
 
   const numberComments = screen.getByRole('link', {
     name: /27 comments/i,
   })
 
-  const authorAndDateHeading = screen.getByRole('heading', {
-    name: /5\/23\/2021, 11:32:31 pm/i,
-  })
-  expect(img).toBeInTheDocument()
+  const authorAndDateHeading = screen.getByText(/about 1 hour ago/i)
   expect(title).toBeInTheDocument()
   expect(showSelf).toBeInTheDocument()
   expect(permalink).toBeInTheDocument()
@@ -45,8 +40,12 @@ test('renders selftext when expanding', () => {
 
 test('renders a post without selftext', () => {
   render(<Post c={mockDataPostNoSelf} />)
+  const img = screen.getByRole('img', {
+    name: /thumbnail for post/i,
+  })
   const showSelf = screen.queryByRole('button', {
     name: /show self text/i,
   })
+  expect(img).toBeInTheDocument()
   expect(showSelf).not.toBeInTheDocument()
 })

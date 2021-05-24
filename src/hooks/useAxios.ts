@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from 'axios'
 function useAxios<T = any>(url: string) {
   const [response, setResponse] = useState<T | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
   const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
@@ -20,6 +21,7 @@ function useAxios<T = any>(url: string) {
       } catch (err) {
         if (!axios.isCancel(err)) {
           console.error(err)
+          setError(err)
           setHasError(true)
         }
       } finally {
@@ -35,7 +37,7 @@ function useAxios<T = any>(url: string) {
     }
   }, [url])
 
-  return { response, isLoading, hasError }
+  return { response, isLoading, hasError, error }
 }
 
 export default useAxios

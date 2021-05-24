@@ -2,29 +2,28 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ButtonContainer = styled.div`
-  margin: 20px;
+  margin: 10px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 `
 const NavigationButton = styled.button`
-  padding: 1px 4px;
-  background: #eee;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  padding: 4px 16px;
+  background: #0079d3;
+  border-radius: 9999px;
+  border: none;
   font-weight: bold;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
+  color: #fff;
+  margin: 4px;
   &:hover {
-    background: #f0f0f0;
-    border: 1px solid #82a6c9;
+    opacity: 0.9;
   }
   &:disabled {
     cursor: not-allowed;
-    &:hover {
-      background: #eee;
-      border: 1px solid #ddd;
-    }
+    background: #ccc;
+    color: #777;
   }
 `
 const ViewMore = styled.span`

@@ -28,8 +28,16 @@ const server = setupServer(
     return res(ctx.status(404), ctx.json({ error: 'Please add request handler' }))
   })
 )
-beforeAll(() => server.listen())
-afterAll(() => server.close())
+
+const RealDate = Date.now
+beforeAll(() => {
+  server.listen()
+  global.Date.now = () => new Date('2021-05-23T22:20:30Z').getTime()
+})
+afterAll(() => {
+  global.Date.now = RealDate
+  server.close()
+})
 afterEach(() => server.resetHandlers())
 
 export { server, rest }

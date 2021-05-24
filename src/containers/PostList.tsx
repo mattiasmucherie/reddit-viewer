@@ -13,21 +13,33 @@ const PostsContainer = styled.ul`
 const SubredditInput = styled.input`
   width: 100%;
   max-width: 200px;
-  font-family: inherit;
-  padding: 0 0 2px;
-  border: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  appearance: none;
+  background-color: #f6f7f8;
+  border-radius: 4px;
+  border: 1px solid #edeff1;
+  box-shadow: none;
+  color: #1c1c1c;
+  display: block;
+  height: 36px;
   outline: none;
-  background-color: transparent;
-  font-size: 20px;
-  line-height: 18px;
-  transition: box-shadow 0.1s ease-out 0s;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  border-radius: 0;
+  padding: 0 16px 0 16px;
+  &:hover,
+  &:focus {
+    background-color: #fff;
+    border: 1px solid #0079d3;
+  }
 `
 const InputContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 30px;
+`
+const StateWrapper = styled.p`
+  display: flex;
+  justify-content: center;
 `
 const POST_LIMIT = 10
 const PostList = () => {
@@ -71,8 +83,8 @@ const PostList = () => {
       {!hasError && (
         <PageButtons isLoading={isLoading} pageCount={pageCount} onClickNext={onClickNext} onClickPrev={onClickPrev} />
       )}
-      {isLoading && <p>Loading</p>}
-      {hasError && <p>Error</p>}
+      {isLoading && <StateWrapper>Loading</StateWrapper>}
+      {hasError && <StateWrapper>Error</StateWrapper>}
       {!isLoading && !hasError && response && hasPosts && (
         <PostsContainer>
           {response.data.children
