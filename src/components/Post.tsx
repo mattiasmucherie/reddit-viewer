@@ -6,9 +6,10 @@ import formatDistance from 'date-fns/formatDistance/index'
 
 const Card = styled.li`
   border-radius: 4px;
-  background: #fff;
+  background: ${({ theme }) => theme.card.bg};
   margin: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid ${({ theme }) => theme.card.border};
+  transition: background-color 0.25s, border 0.25s;
 `
 const CardContainer = styled.div`
   display: flex;
@@ -20,7 +21,9 @@ const FirstColumn = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex: 0 0 40px;
-  background: #f7f9fa;
+  background-color: ${({ theme }) => theme.card.firstColumnBg};
+  transition: background-color 0.25s, color 0.25s;
+
   border-radius: 4px 0 0 4px;
 `
 const SecondColumn = styled.div`
@@ -46,7 +49,8 @@ const TitleContainer = styled.div`
 const PostTitle = styled.h3`
   margin: 0;
   padding: 0;
-  color: #000;
+  color: ${({ theme }) => theme.color};
+  transition: color 0.25s;
   font-size: 18px;
   font-weight: bold;
 `
@@ -54,7 +58,7 @@ const AuthorAndDate = styled.div`
   margin: 0 8px 8px;
   & > span {
     margin: 0;
-    color: #666;
+    color: #818384;
     font-size: 12px;
     font-weight: 400;
   }
@@ -101,7 +105,8 @@ const ExpandButton = styled.button`
 const ExpandedContainer = styled.div`
   max-width: 100%;
   overflow: scroll;
-  border-left: 40px solid #f7f9fa;
+  border-left: 40px solid ${({ theme }) => theme.card.firstColumnBg};
+  transition: border 0.25s;
   border-radius: 0 0 0 4px;
   padding: 0 8px;
 `

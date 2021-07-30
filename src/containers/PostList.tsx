@@ -17,25 +17,27 @@ const SubredditInput = styled.input`
   font-weight: 400;
   line-height: 21px;
   appearance: none;
-  background-color: #f6f7f8;
+  background-color: ${({ theme }) => theme.input.bg};
   border-radius: 4px;
-  border: 1px solid #edeff1;
+  border: 1px solid ${({ theme }) => theme.input.border};
   box-shadow: none;
-  color: #1c1c1c;
+  color: ${({ theme }) => theme.input.color};
   display: block;
   height: 36px;
   outline: none;
   padding: 0 16px 0 16px;
+  transition: background-color 0.25s, color 0.25s, border 0.25s;
+
   &:hover,
   &:focus {
-    background-color: #fff;
-    border: 1px solid #0079d3;
+    background-color: ${({ theme }) => theme.input.focus.bg};
+    border: 1px solid ${({ theme }) => theme.input.focus.border};
   }
 `
 const InputContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 10px;
 `
 const StateWrapper = styled.p`
   display: flex;
