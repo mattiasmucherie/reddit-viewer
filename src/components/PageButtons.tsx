@@ -7,7 +7,7 @@ const ButtonContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
 `
-const NavigationButton = styled.button`
+export const NavigationButton = styled.button`
   padding: 4px 16px;
   background: #0079d3;
   border-radius: 9999px;
